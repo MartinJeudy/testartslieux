@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John-Lucas Williamson - Hormur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #E85D5D;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        .nav {
+            display: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-header {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .profile-content {
+            padding: 20px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .tag-music {
+            color: #E85D5D;
+            border-color: #E85D5D;
+            background: #FFF5F5;
+        }
+
+        .tag-classique {
+            color: #E85D5D;
+            border-color: #E85D5D;
+            background: white;
+        }
+
+        .artist-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .artist-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-icon {
+            width: 16px;
+            height: 16px;
+            color: #999;
+        }
+
+        /* NOUVELLE SECTION - Qui amène le public */
+        .public-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .public-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .public-title::before {
+            content: "👥";
+            font-size: 20px;
+        }
+
+        .public-answer {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .public-answer-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .public-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* FIN NOUVELLE SECTION */
+
+        .artist-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #F5F5F5;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .stat-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            color: white;
+        }
+
+        .badge-purple {
+            background: #6B4FA0;
+        }
+
+        .badge-gray {
+            background: #6B7280;
+        }
+
+        .audience-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .audience-tag {
+            background: #FFF;
+            border: 2px solid #E85D5D;
+            color: #E85D5D;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .description {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .video-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .preferences-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .preference-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #F9F9F9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .preference-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FFE5E5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .calendar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .availability-note {
+            background: #F0F9FF;
+            border-left: 4px solid #3B82F6;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #1E40AF;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: #666;
+            padding: 8px 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #F9F9F9;
+        }
+
+        .calendar-day:hover {
+            background: #FFE5E5;
+        }
+
+        .map-section {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #E5E5E5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .contact-button {
+            background: #E85D5D;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .contact-button:hover {
+            background: #D54D4D;
+        }
+
+        @media (min-width: 768px) {
+            .nav {
+                display: flex;
+                gap: 25px;
+                font-size: 14px;
+            }
+
+            .nav a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            .nav a:hover {
+                color: #E85D5D;
+            }
+
+            .profile-header {
+                display: grid;
+                grid-template-columns: 350px 1fr;
+            }
+
+            .profile-image {
+                height: 100%;
+                min-height: 400px;
+            }
+
+            .container {
+                padding: 40px;
+            }
+
+            .calendar {
+                gap: 8px;
+            }
+
+            .public-section {
+                padding: 25px;
+            }
+
+            .public-answer {
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .profile-header {
+                grid-template-columns: 450px 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">H<span>❤</span>RMUR</div>
+        <nav class="nav">
+            <a href="#">Accueil</a>
+            <a href="#">Artistes</a>
+            <a href="#">Lieux</a>
+            <a href="#">Événements</a>
+            <a href="#">En savoir plus</a>
+            <a href="#">Mon espace</a>
+            <a href="#">Messages</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800" alt="John-Lucas Williamson" class="profile-image">
+            <div class="profile-content">
+                <div class="tags">
+                    <span class="tag tag-music">🎵 MUSIQUE</span>
+                    <span class="tag tag-classique">CLASSIQUE</span>
+                </div>
+
+                <h1 class="artist-name">John-Lucas Williamson</h1>
+
+                <div class="artist-info">
+                    <div class="info-item">
+                        <span>📍</span>
+                        <span><strong>(75)</strong> Paris</span>
+                    </div>
+                    <div class="info-item">
+                        <span>🚗</span>
+                        <span><strong>Déplacement possible :</strong> Régions sous quelques heures</span>
+                    </div>
+                    <div class="info-item">
+                        <span>📊</span>
+                        <span><strong>Taux de réponse :</strong> 88%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOUVELLE SECTION - Qui amène le public -->
+        <div class="public-section">
+            <div class="public-title">
+                Communication et public
+            </div>
+            <div class="public-answer">
+                <div class="public-answer-text">
+                    Je m'occupe de la communication
+                </div>
+                <div class="public-subtitle">
+                    Cet artiste prend en charge la communication et amène son public
+                </div>
+            </div>
+        </div>
+        <!-- FIN NOUVELLE SECTION -->
+
+        <div class="description">
+            <h2 class="artist-title">Pianiste romantique pour une musique douce et onirique</h2>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-badge badge-purple">1h</div>
+                    <span>de spectacle environ</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-badge badge-gray">5</div>
+                    <span>spectateurs min.</span>
+                </div>
+                <div class="stat-item">
+                    <span>3 prix spectateurs</span>
+                </div>
+            </div>
+
+            <div class="audience-tags">
+                <span class="audience-tag">Soutien</span>
+                <span class="audience-tag">Normal</span>
+                <span class="audience-tag">Petit budget/enfant</span>
+            </div>
+
+            <p>
+                Après quatre ans d'expatriation au Canada (Montréal) où j'ai bénéficié de la scène nord-américaine, je suis actuellement en tournée dans toute la France avec Alison Wheeler (chroniqueuse chez Quotidien) pour son spectacle musical. Pianiste et compositeur depuis plus de 20 ans, ma musique se prête parfaitement à des concerts intimistes du dimanche après-midi, enlacé sous un plaid avec une tasse de thé. Inspiré par des compositeurs comme Chopin, Ludovico Einaudi ou plus récemment Sofiane Pamart, mes concerts mélangent pièces du répertoire classique, composition et improvisation. Contactez-moi et nous discuterons de ce que vous cherchez afin d'amener la touche musicale qui manque à votre lieu. Musicalement, John-Lucas
+            </p>
+        </div>
+
+        <div class="video-section">
+            <h3 class="section-title">Vidéos</h3>
+            <div class="video-placeholder">
+                ▶️
+            </div>
+        </div>
+
+        <div class="preferences-section">
+            <h3 class="section-title">Préférences de l'artiste</h3>
+            
+            <div class="preference-item">
+                <div class="preference-icon">👥</div>
+                <div>
+                    <strong>Tout public</strong>
+                </div>
+            </div>
+
+            <div class="preference-item">
+                <div class="preference-icon">📏</div>
+                <div>
+                    <strong>M² min.</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <h3 class="section-title">Disponibilité</h3>
+            
+            <div class="availability-note">
+                📅 Disponible tous les jours
+            </div>
+
+            <h4>Octobre 2025</h4>
+            <div class="calendar">
+                <div class="calendar-header">L</div>
+                <div class="calendar-header">M</div>
+                <div class="calendar-header">M</div>
+                <div class="calendar-header">J</div>
+                <div class="calendar-header">V</div>
+                <div class="calendar-header">S</div>
+                <div class="calendar-header">D</div>
+                
+                <div class="calendar-day"></div>
+                <div class="calendar-day"></div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+                <div class="calendar-day">4</div>
+                <div class="calendar-day">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+                <div class="calendar-day">8</div>
+                <div class="calendar-day">9</div>
+                <div class="calendar-day">10</div>
+                <div class="calendar-day">11</div>
+                <div class="calendar-day">12</div>
+                <div class="calendar-day">13</div>
+                <div class="calendar-day">14</div>
+                <div class="calendar-day">15</div>
+                <div class="calendar-day">16</div>
+                <div class="calendar-day">17</div>
+                <div class="calendar-day">18</div>
+                <div class="calendar-day">19</div>
+                <div class="calendar-day">20</div>
+                <div class="calendar-day">21</div>
+                <div class="calendar-day">22</div>
+                <div class="calendar-day">23</div>
+                <div class="calendar-day">24</div>
+                <div class="calendar-day">25</div>
+                <div class="calendar-day">26</div>
+                <div class="calendar-day">27</div>
+                <div class="calendar-day">28</div>
+                <div class="calendar-day">29</div>
+                <div class="calendar-day">30</div>
+                <div class="calendar-day">31</div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-placeholder">
+                🗺️ Carte - (75) Paris
+            </div>
+        </div>
+
+        <button class="contact-button">Contacter l'artiste</button>
+    </div>
+</body>
+</html>
