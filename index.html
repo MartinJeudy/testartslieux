@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototypes Hormur - Communication et Public</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .icon-artist {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .icon-venue {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .example-box {
+            background: #F9F9F9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+
+        .example-text {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .button-venue {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        .button-venue:hover {
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-section li {
+            padding: 10px 0;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .info-section li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section li::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .variations {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .variations h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .variation-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .variation-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">H❤RMUR</div>
+            <h1>Prototypes - Communication & Public</h1>
+            <p>Nouvelles maquettes intégrant l'information "Qui amène le public ?" pour améliorer le matching entre artistes et lieux</p>
+        </div>
+
+        <div class="info-section">
+            <h2>🎯 Objectif de cette fonctionnalité</h2>
+            <p>
+                Cette nouvelle section permet de clarifier dès le départ qui est responsable de la communication et d'amener le public lors d'un événement. Cela évite les malentendus et permet de mettre en relation des utilisateurs plus compatibles.
+            </p>
+            <ul>
+                <li>Éviter que les organisateurs se renvoient la balle sur la communication</li>
+                <li>Matcher des profils compatibles (ex: éviter qu'un artiste sans com rencontre un lieu sans com)</li>
+                <li>Clarifier les attentes dès la page de profil</li>
+                <li>Faciliter la prise de décision avant de contacter</li>
+            </ul>
+        </div>
+
+        <div class="variations">
+            <h3>💡 Trois variantes possibles</h3>
+            <div class="variation-item">
+                <strong>1. "Je m'occupe de la communication"</strong>
+                L'artiste ou le lieu amène son propre public (gradient violet)
+            </div>
+            <div class="variation-item">
+                <strong>2. "L'autre s'occupe de la communication"</strong>
+                L'artiste attend que le lieu communique ou vice versa (gradient rose/rouge)
+            </div>
+            <div class="variation-item">
+                <strong>3. "Nous communiquons ensemble"</strong>
+                Collaboration pour amener le public (gradient bleu - comme montré dans la page lieu)
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-artist">🎵</div>
+                    <div>
+                        <div class="card-title">Page Artiste</div>
+                        <div style="color: #999; font-size: 14px;">John-Lucas Williamson</div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Page d'un pianiste classique basé à Paris. Dans cet exemple, l'artiste indique qu'il s'occupe lui-même de la communication et amène son public.
+                </p>
+
+                <div class="example-box">
+                    <div class="example-title">Section affichée :</div>
+                    <div class="example-text">"Je m'occupe de la communication - Cet artiste prend en charge la communication et amène son public"</div>
+                </div>
+
+                <a href="page-artiste.html" class="button" target="_blank">Voir le prototype →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon icon-venue">🏡</div>
+                    <div>
+                        <div class="card-title">Page Lieu</div>
+                        <div style="color: #999; font-size: 14px;">Dans les pas de Gaby</div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Page d'un jardin privé à Saint-Maurice-sur-Fessard. Dans cet exemple, le lieu indique préférer une collaboration avec l'artiste pour communiquer.
+                </p>
+
+                <div class="example-box">
+                    <div class="example-title">Section affichée :</div>
+                    <div class="example-text">"L'artiste et moi communiquons ensemble - Ce lieu favorise une collaboration pour amener le public"</div>
+                </div>
+
+                <a href="page-lieu.html" class="button button-venue" target="_blank">Voir le prototype →</a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>📱 Points clés de l'intégration</h2>
+            <p>
+                La nouvelle section a été intégrée de manière cohérente avec le design existant :
+            </p>
+            <ul>
+                <li>Positionnée en haut de page, après les informations de base (nom, localisation, tags)</li>
+                <li>Design distinctif avec un gradient coloré pour attirer l'attention</li>
+                <li>Utilisation d'icônes (👥) pour une compréhension immédiate</li>
+                <li>Responsive : s'adapte parfaitement au mobile et au desktop</li>
+                <li>Cohérente avec la charte graphique Hormur (couleurs, typographie, espacements)</li>
+                <li>Différentes couleurs de gradient selon la réponse (violet, rose, bleu)</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Prototypes créés pour Hormur - Octobre 2025</p>
+            <p style="margin-top: 10px;">Ces maquettes sont prêtes à être testées sur Netlify et intégrées en production</p>
+        </div>
+    </div>
+</body>
+</html>
